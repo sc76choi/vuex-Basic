@@ -24,3 +24,4 @@ npm run test
 ```
 npm run lint
 ```
+### https://www.youtube.com/watch?v=7i0D7OSogYc&list=PLZzSdj89sCN292abcbI3utND8pA1T1OyB&index=2
