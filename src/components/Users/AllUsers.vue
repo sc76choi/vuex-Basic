@@ -3,8 +3,9 @@
     <h1>All Users({{ count }})</h1>
     <h3>{{ percent }} %</h3>
     <v-list two-line>
+      <!-- mapState로 대체 $store.state.allUsers -->
       <v-list-tile 
-        v-for="(user, index) in allUsers" // mapState로 대체 $store.state.allUsers
+        v-for="(user, index) in allUsers"
         :key="index"
         avatar
       >
