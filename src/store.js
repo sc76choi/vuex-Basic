@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from './router'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: { // data
+    userInfo: null,
     allUsers:[
       // {userId: 'hoza123', password: '123', name: 'Hoza', address: 'Seoul', src:'https://goo.gl/oqLfJR'},
       // {userId: 'max123', password: '456', name: 'Max', address: 'Berlin', src:'https://goo.gl/Ksk9B9'},
@@ -38,9 +40,10 @@ export default new Vuex.Store({
     },
 
     // 로그인이 성공했을 때
-    loginSuccess(state) {
+    loginSuccess(state, payload) {
       state.isLogin = true
       state.isLoginError =  false
+      state.userInfo = payload // userInfo에 로그인한 유저를 넣어줌
     },
     // 로그인이 실패했을 때
     loginError(state) {
@@ -65,21 +68,13 @@ export default new Vuex.Store({
           if (user.email === loginObj.email) selectedUser = user
       })
       
-      if (selectedUser === null ) {
-          // this.isError = true
-          commit('loginError')
-        } else {
-          // console.log(selectedUser.password, this.password)
-          
-          if(selectedUser.password !== loginObj.password ) {
-            commit('loginError')
-            // this.isError = true
-          } else {
-            commit('loginSuccess')
-            // this.isError = false
-            //   this.loginSuccess = true
-          }
+      if (selectedUser === null || selectedUser.password !== loginObj.password ) {
+        commit('loginError')
+      } else {
+        commit('loginSuccess', selectedUser)
+        router.push({name: "mypage"})
       }
+      
       // 그 유저의 비밀번호화 입력된 비밀번호를 비교한다.
       console.log(this.email, this.password)
       return selectedUser

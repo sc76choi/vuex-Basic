@@ -22,12 +22,20 @@
             <v-list-tile-title>Users</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile router :to="{name: 'login'}" exact>
+        <v-list-tile v-if="isLogin === false" router :to="{name: 'login'}" exact>
           <v-list-tile-action>
             <v-icon>info</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Login</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile v-if="isLogin === true" router :to="{name: 'mypage'}" exact>
+          <v-list-tile-action>
+            <v-icon>person</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Mypage</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
