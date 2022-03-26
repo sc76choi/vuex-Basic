@@ -66,7 +66,7 @@ export default new Vuex.Store({
       commit('addUsers', payload)
     },
     // 로그인을 시도
-    login({commit}, loginObj) {
+    login({dispatch}, loginObj) {
       console.log(loginObj)
 
       // 로그인 시도
@@ -80,31 +80,30 @@ export default new Vuex.Store({
       )
       .then((response) => {
         let token = response.data.token
-        let config = {
-          headers: {
-            "access-token": token
-          }
-        }
-        
+
+        // 토큰을 로컬스토리지에 저장
+        localStorage.setItem("access_token", token)
+        dispatch("getMemberInfo")
+
         // 성공시 token: 블라블라(실제로는 user_id 값을 받아 옴)
         // 토큰을 헤더에 포함시켜서 유저정보를 요청
-        axios.get('https://reqres.in/api/user/2', config)
-        .then(res => {
-          console.log(res);
-          // color: "#C74375"
-          // id: 2
-          // name: "fuchsia rose"
-          // pantone_value: "17-2031"
-          // year: 2001
-          let userInfo = {
-            name: res.data.data.name,
-            year: res.data.data.year
-          }
-          commit('loginSuccess', userInfo)
-        })
-        .catch(err => {
-          alert('이메일과 비번을 확인하세요.')
-        })
+        // axios.get('https://reqres.in/api/user/2', config)
+        // .then(res => {
+        //   console.log(res);
+        //   // color: "#C74375"
+        //   // id: 2
+        //   // name: "fuchsia rose"
+        //   // pantone_value: "17-2031"
+        //   // year: 2001
+        //   let userInfo = {
+        //     name: res.data.data.name,
+        //     year: res.data.data.year
+        //   }
+        //   commit('loginSuccess', userInfo)
+        // })
+        // .catch(err => {
+        //   alert('이메일과 비번을 확인하세요.')
+        // })
 
         console.log(response);
       })
@@ -136,6 +135,35 @@ export default new Vuex.Store({
     logout({ commit }) {
       commit('logout')
       router.push({name: "home"})
+    },
+    getMemberInfo({commit}) {
+
+      // 로컬스토리지에 저장되어 있는 토큰을 불러온다.
+      let token = localStorage.getItem("access_token")
+      let config = {
+        headers: {
+          "access-token": token
+        }
+      }
+      // 성공시 token: 블라블라(실제로는 user_id 값을 받아 옴)
+        // 토큰을 헤더에 포함시켜서 유저정보를 요청
+        axios.get('https://reqres.in/api/user/2', config)
+        .then(res => {
+          console.log(res);
+          // color: "#C74375"
+          // id: 2
+          // name: "fuchsia rose"
+          // pantone_value: "17-2031"
+          // year: 2001
+          let userInfo = {
+            name: res.data.data.name,
+            year: res.data.data.year
+          }
+          commit('loginSuccess', userInfo)
+        })
+        .catch(err => {
+          alert('이메일과 비번을 확인하세요.')
+        })
     }
   }
 })
