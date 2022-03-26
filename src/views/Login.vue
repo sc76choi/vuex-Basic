@@ -32,8 +32,8 @@
                         <v-btn color="primary" large block depressed
                         @click="login({email, password })"
                         >로그인</v-btn>
-                        <v-btn @click="gettest">axios get 테스트</v-btn>
-                        <v-btn @click="posttest">axios post 테스트</v-btn>
+                        <!-- <v-btn @click="gettest">axios get 테스트</v-btn>
+                        <v-btn @click="posttest">axios post 테스트</v-btn> -->
                     </div>
                 </v-card>
             </v-flex>
@@ -65,40 +65,41 @@ export default {
     },
     methods: {
         ...mapActions(['login']),
-        gettest() {
-            // Make a request for a user with a given ID
-            // axios.get('/user?ID=12345')
-            axios.get('https://reqres.in/api/users?page=2')
-            .then( (response) => {
-                // handle success
-                console.log(response);
-            })
-            .catch( (error) => {
-                // handle error
-                console.log(error);
-            })
-            .then( () => {
-                // always executed
-                console.log('gettest')
-            });
-        },
-        posttest() {
-            axios.post('https://reqres.in/api/register', {
-                "email": "eve.holt@reqres.in",
-                "password": "pistol"
-            })
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-            .then( () => {
-                console.log('posttest')
-            }
-            );
+        // gettest() {
+        //     // Make a request for a user with a given ID
+        //     // axios.get('/user?ID=12345')
+        //     axios.get('https://reqres.in/api/users?page=2')
+        //     .then( (response) => {
+        //         // handle success
+        //         console.log(response);
+        //     })
+        //     .catch( (error) => {
+        //         // handle error
+        //         console.log(error);
+        //     })
+        //     .then( () => {
+        //         // always executed
+        //         console.log('gettest')
+        //     });
+        // },
+        // posttest() {
+        //     axios.post('https://reqres.in/api/register', {
+        //         "email": "eve.holt@reqres.in",
+        //         "password": "pistol"
+        //     })
+        //     .then((response) => {
+        //         console.log(response);
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     })
+        //     .then( () => {
+        //         console.log('posttest')
+        //     }
+        //     );
+        // }
 
-        }
+        // store로 이동
         // login() {
             // // 전체 유저에서 해당 이메일로 유저를 찾는다.
             // let selectedUser = null
