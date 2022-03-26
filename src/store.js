@@ -49,6 +49,11 @@ export default new Vuex.Store({
     loginError(state) {
       state.isLogin = false
       state.isLoginError =  true
+    },
+    logout(state) {
+      state.isLogin = false
+      state.isLoginError = false
+      state.userInfo = null
     }
   },
   // 비지니스 로직
@@ -78,6 +83,10 @@ export default new Vuex.Store({
       // 그 유저의 비밀번호화 입력된 비밀번호를 비교한다.
       console.log(this.email, this.password)
       return selectedUser
+    },
+    logout({ commit }) {
+      commit('logout')
+      router.push({name: "home"})
     }
   }
 })

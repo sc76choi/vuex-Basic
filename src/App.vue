@@ -46,6 +46,26 @@
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn v-if="isLogin" flat>웰컴</v-btn>
+        <v-menu offset-y v-if="isLogin">
+            <v-btn
+              slot="activator"
+              dark
+              flat
+              icon
+            >
+              <v-icon>more_vert</v-icon>
+            </v-btn>
+
+          <v-list>
+            <v-list-tile router :to="{name: 'mypage'}">
+              <v-list-tile-title>마이페이지</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile
+            @click="$store.dispatch('logout')">
+              <v-list-tile-title>로그아웃</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
         <v-btn flat v-else router :to="{name: 'login'}">Log In</v-btn>
         <v-btn flat>Link Three</v-btn>
       </v-toolbar-items>
@@ -60,7 +80,7 @@
 </template>
 
 <script>
-import {mapState} from "vuex"
+import {mapActions, mapState} from "vuex"
 
   export default {
     data: () => ({
@@ -69,6 +89,9 @@ import {mapState} from "vuex"
     computed: {
       ...mapState(['isLogin'])
     },
+    // methods: {
+    //   ...mapActions(['logout'])
+    // },
     props: {
       source: String
     }
