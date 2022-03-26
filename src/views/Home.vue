@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
   computed: {
-      ...mapGetters(['allUsersCount', 'countOfSeoul', 'percentOfSeoul']) // 불러와야 사용가능
-    }
-}
+    ...mapGetters(["allUsersCount", "countOfSeoul", "percentOfSeoul"]), // 불러와야 사용가능
+  },
+};
 </script>

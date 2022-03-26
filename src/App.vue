@@ -1,12 +1,8 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer
-      v-model="drawer"
-      fixed
-      app
-    >
+    <v-navigation-drawer v-model="drawer" fixed app>
       <v-list dense>
-        <v-list-tile router :to="{name: 'home'}" exact>
+        <v-list-tile router :to="{ name: 'home' }" exact>
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -14,7 +10,7 @@
             <v-list-tile-title>Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile router :to="{name: 'users'}" exact>
+        <v-list-tile router :to="{ name: 'users' }" exact>
           <v-list-tile-action>
             <v-icon>person</v-icon>
           </v-list-tile-action>
@@ -22,7 +18,12 @@
             <v-list-tile-title>Users</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile v-if="isLogin === false" router :to="{name: 'login'}" exact>
+        <v-list-tile
+          v-if="isLogin === false"
+          router
+          :to="{ name: 'login' }"
+          exact
+        >
           <v-list-tile-action>
             <v-icon>info</v-icon>
           </v-list-tile-action>
@@ -30,7 +31,12 @@
             <v-list-tile-title>Login</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile v-if="isLogin === true" router :to="{name: 'mypage'}" exact>
+        <v-list-tile
+          v-if="isLogin === true"
+          router
+          :to="{ name: 'mypage' }"
+          exact
+        >
           <v-list-tile-action>
             <v-icon>person</v-icon>
           </v-list-tile-action>
@@ -47,31 +53,26 @@
       <v-toolbar-items class="hidden-sm-and-down">
         <v-btn v-if="isLogin" flat>웰컴</v-btn>
         <v-menu offset-y v-if="isLogin">
-            <v-btn
-              slot="activator"
-              dark
-              flat
-              icon
-            >
-              <v-icon>more_vert</v-icon>
-            </v-btn>
+          <v-btn slot="activator" dark flat icon>
+            <v-icon>more_vert</v-icon>
+          </v-btn>
 
           <v-list>
-            <v-list-tile router :to="{name: 'mypage'}">
+            <v-list-tile router :to="{ name: 'mypage' }">
               <v-list-tile-title>마이페이지</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile
-            @click="$store.dispatch('logout')">
+            <v-list-tile @click="$store.dispatch('logout')">
               <v-list-tile-title>로그아웃</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>
-        <v-btn flat v-else router :to="{name: 'login'}">Log In</v-btn>
+        <v-btn flat v-else router :to="{ name: 'login' }">Log In</v-btn>
         <v-btn flat>Link Three</v-btn>
       </v-toolbar-items>
     </v-toolbar>
     <v-content>
-      <router-view/>  <!-- 내용이 들어갈 자리 -->
+      <router-view />
+      <!-- 내용이 들어갈 자리 -->
     </v-content>
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2017</span>
@@ -80,20 +81,20 @@
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex"
+import { mapActions, mapState } from "vuex";
 
-  export default {
-    data: () => ({
-      drawer: null
-    }),
-    computed: {
-      ...mapState(['isLogin'])
-    },
-    // methods: {
-    //   ...mapActions(['logout'])
-    // },
-    props: {
-      source: String
-    }
-  }
+export default {
+  data: () => ({
+    drawer: null,
+  }),
+  computed: {
+    ...mapState(["isLogin"]),
+  },
+  // methods: {
+  //   ...mapActions(['logout'])
+  // },
+  props: {
+    source: String,
+  },
+};
 </script>
