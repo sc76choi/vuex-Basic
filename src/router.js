@@ -40,6 +40,12 @@ export default new Router({
         import(/* webpackChunkName: "users" */ "./views/Users.vue"),
     },
     {
+      path: "/todo/todohome",
+      name: "todoHome",
+      component: () =>
+        import(/* webpackChunkName: "todoHome" */ "./views/todo/TodoHome.vue"),
+    },
+    {
       path: "/login",
       beforeEnter: rejectAuthUser,
       name: "login",
