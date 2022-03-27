@@ -90,7 +90,7 @@ export default new Vuex.Store({
     },
     // 로그인을 시도
     login({ dispatch }, loginObj) {
-      console.log(loginObj);
+      // console.log(loginObj);
 
       // 로그인 시도
       // 파라메터(body)

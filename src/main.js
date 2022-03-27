@@ -6,7 +6,13 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
-export const EventBus = new Vue();
+export const EventBus = new Vue({
+  methods: {
+    listEdit: function(memo, index) {
+      this.$emit('listEdit', memo, index)
+    }
+  }
+});
 
 new Vue({
   router,

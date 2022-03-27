@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-card 
-            class="pa-2"
+            class="pa-2 mb-1"
             :class="{'done': list.status === 'done'}"
             v-for="(list, index) in todoList"
             :key="index"
@@ -20,13 +20,26 @@
            <v-btn fab flat dark small color="primary" 
             @click="$emit('listDelete', index)"
             >제거</v-btn>
+           <v-btn 
+            @click="listEdit(list.memo, index)"
+            v-if="list.status === 'created'"
+            fab flat dark small color="yellow"
+            >수정</v-btn>
         </v-card>
     </div>
 </template>
 
 <script>
+import { EventBus } from "../../main" 
+
 export default {
-    props: ["todoList"]
+    props: ["todoList"],
+    methods: {
+        listEdit(memo, index) {
+            console.log("호출 listEdit", memo, index)
+            EventBus.listEdit(memo, index)
+        }
+    }
 }
 </script>
 
